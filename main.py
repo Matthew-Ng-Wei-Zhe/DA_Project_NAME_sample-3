@@ -1,11 +1,11 @@
 #########################################################################
 #Title: PYTHON Project Scenario - Data Analysis
-#Description: This program allows user to analyse.......
+#Description: This program allows user to analyse Top 3 Country in SEA coming to Singapore from 2007 to 2017
 #Name: <Matthew Ng Wei Zhe>
-#Group Name: <...>
-#Class: <...>
-#Date: <...>
-#Version: <...>
+#Group Name: <Python Underdog>
+#Class: <PN2004J>
+#Date: <17-02-21>
+#Version: <1.0>
 #########################################################################
 
 #########################################################################
@@ -44,6 +44,7 @@ def sortCountry(df):
 
   #slicing dataframe using iloc 2007 - 2017 SEA to form new dataframe
   new_df = df.iloc[348:479, 0:9]
+  #form new dataframe based on new index and disposable of the old index column
   new_df = new_df.reset_index(drop=True)
 
   #disply new dataframe (rows and colums)
