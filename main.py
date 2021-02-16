@@ -49,6 +49,9 @@ def sortCountry(df):
   print("The following new dataframe for SEA from 2007 - 2017 are read as follows: \n")
   print(new_df)
 
+  top3 = df.iloc[348:, 2:9].sum(axis=0).sort_values(ascending=False).nlargest(3)
+  print(top3)
+
 #########################################################################
 #FUNCTION Branch: End of Code
 #########################################################################
