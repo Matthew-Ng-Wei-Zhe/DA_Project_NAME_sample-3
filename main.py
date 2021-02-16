@@ -44,13 +44,30 @@ def sortCountry(df):
 
   #slicing dataframe using iloc 2007 - 2017 SEA to form new dataframe
   new_df = df.iloc[348:479, 0:9]
+  new_df = new_df.reset_index(drop=True)
 
   #disply new dataframe (rows and colums)
   print("The following new dataframe for SEA from 2007 - 2017 are read as follows: \n")
   print(new_df)
 
-  top3 = new_df.iloc[0:, 2:9].sum(axis=0).sort_values(ascending=False).nlargest(3)
-  print(top3)
+  #selecting country columns and adding them on a vertical axis in descending order based on top 3
+  top3_country = new_df.iloc[:, 2:9].sum(axis=0).sort_values(ascending=False).nlargest(3)
+
+  #print top 3 countries coming to Singapore in SEA from 2007 - 2017
+  print("\nThe top 3 countries with the most visitors coming to Singapore listed in SEA from 2007 - 2017 are read as follows:\n")
+
+  #reset index to generate new dataframe for sum value output
+  top3_country = top3_country.reset_index()
+  #sort sum value output into columns based on country and visitors
+  top3_country.columns = ['Country', 'Visitors']
+  #label top 3
+  top3_country.index = ["Most Visted →", "Second Most Visted → ", "Third Most Visted →"]
+
+  #display top 3 countries coming to Singapore in SEA from 2007 - 2017
+  print(top3_country)  
+
+  #return function to caller which makes call to other function
+  return
 
 #########################################################################
 #FUNCTION Branch: End of Code
