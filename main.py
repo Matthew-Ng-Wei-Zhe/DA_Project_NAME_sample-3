@@ -5,7 +5,7 @@
 #Group Name: <Python Underdog>
 #Class: <PN2004J>
 #Date: <17-02-21>
-#Version: <1.1>
+#Version: <1.2>
 #########################################################################
 
 #########################################################################
@@ -62,9 +62,9 @@ def sortCountry(df):
   #reset index to generate new dataframe for sum value output
   top3_country = top3_country.reset_index()
   #sort sum value output into columns based on country and visitors
-  top3_country.columns = ["Country", "Visitors"]
+  top3_country.columns = ['Country', 'Visitors']
   #label top 3
-  top3_country.index = ["Most Visted →", "Second Most Visted → ", "Third Most Visted →"]
+  top3_country.index = ['Most Visted →', 'Second Most Visted → ', 'Third Most Visted →']
 
   #display top 3 countries coming to Singapore in SEA from 2007 - 2017
   try:
@@ -77,15 +77,16 @@ def sortCountry(df):
   if token >= 1:
     user_decision = input("\nDo you want a graphical model? Yes/No : ",)
     if user_decision == "Yes":
-     activities = ['Indonesia', 'Malaysia', 'Philippines']
-     slices = [1, 3, 4]
+     activities = ['Brunei Darussalam ', 'Indonesia', 'Malaysia', 'Philippines', 'Thailand', 'Viet Nam', 'Myanmar']
+     slices = [715883, 27572424, 11337420, 6548622, 4945136, 3914607, 1042608]
      pit.pie(slices,
         labels=activities,
         startangle=90,
         shadow=True,
-        explode=(0.2, 0, 0),
+        explode=(0, 0, 0, 0, 0, 0, 0),
         autopct='%1.2f%%')
 
+     pit.legend()
      pit.show()
      print("Request is successful!")
     elif user_decision == "No":
