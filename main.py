@@ -15,7 +15,7 @@
 import pandas as pd
 
 #import matplotlib for graphic mode
-import matplotlib.pyplot as uo
+import matplotlib.pyplot as pi
 #########################################################################
 
 #########################################################################
@@ -73,8 +73,9 @@ def sortCountry(df):
      #fill in graphical mode information
      countries = ['Brunei Darussalam ', 'Indonesia', 'Malaysia', 'Philippines', 'Thailand', 'Viet Nam', 'Myanmar']
      slices = [715883, 27572424, 11337420, 6548622, 4945136, 3914607, 1042608]
-     uo.pie(slices, labels=countries, startangle=90, shadow=False, autopct='%1.2f%%')
-     uo.legend()
+     pi.pie(slices, labels=countries, startangle=90, shadow=False, autopct='%1.2f%%')
+     pi.legend()
+     pi.show(block=False)#show pie chart without stopping program
     elif user_decision == 'n': #deny graphical mode
      print("Request has been aborted!")
     else: #report and deny graphical mode
@@ -86,23 +87,24 @@ def sortCountry(df):
 #########################################################################
 
 #########################################################################
-#Primary Branch
+#Main Branch
 #########################################################################
 if __name__ == '__main__':
   
   #Project Title
   print('##############################################')
   print('# Primary Data Analysis App - PYTHON Project #')
+
   print('##############################################')
 
   #perform data analysis on specific excel (CSV) file
   DataAnalysis()
 
-  print('\n\n################################################')
+  print('\n################################################')
   print('# Secondary Data Analysis App - PYTHON Project #')
   print('################################################')
 
-  uo.show()
+  prin = input("j", )
 #########################################################################
 
 
