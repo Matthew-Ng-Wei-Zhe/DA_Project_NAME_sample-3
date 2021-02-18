@@ -5,7 +5,7 @@
 #Group Name: <Python Underdog>
 #Class: <PN2004J>
 #Date: <17-02-21>
-#Version: <1.3a>
+#Version: <2.0>
 #########################################################################
 
 #########################################################################
@@ -15,7 +15,7 @@
 import pandas as pd
 
 #import matplotlib for graphic mode
-import matplotlib.pyplot as pit
+import matplotlib.pyplot as uo
 #########################################################################
 
 #########################################################################
@@ -69,18 +69,12 @@ def sortCountry(df):
   if graphical_token >= 1: #identify token/key to unlock user input for graphical mode decision
     user_decision = input("\nDo you want a graphical model? Y/N : ",).lower() #convert all input to lowercase to minimize user input error
     if user_decision == 'y': #accept graphical mode
+     print("Request has been passed!")
+     #fill in graphical mode information
      countries = ['Brunei Darussalam ', 'Indonesia', 'Malaysia', 'Philippines', 'Thailand', 'Viet Nam', 'Myanmar']
      slices = [715883, 27572424, 11337420, 6548622, 4945136, 3914607, 1042608]
-     pit.pie(slices,
-        labels=countries,
-        startangle=90,
-        shadow=False,
-        explode=(0, 0, 0, 0, 0, 0, 0),
-        autopct='%1.2f%%')
-
-     pit.legend()
-     pit.show()
-     print("Request is successful!")
+     uo.pie(slices, labels=countries, startangle=90, shadow=False, autopct='%1.2f%%')
+     uo.legend()
     elif user_decision == 'n': #deny graphical mode
      print("Request has been aborted!")
     else: #report and deny graphical mode
@@ -103,7 +97,14 @@ if __name__ == '__main__':
 
   #perform data analysis on specific excel (CSV) file
   DataAnalysis()
+
+  print('\n\n################################################')
+  print('# Secondary Data Analysis App - PYTHON Project #')
+  print('################################################')
+
+  uo.show()
 #########################################################################
+
 
 #########################################################################
 #End of Code 
