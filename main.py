@@ -1,24 +1,21 @@
 #########################################################################
 #Title: PYTHON Project Scenario - Data Analysis
-#Description: This program allows user to analyse Top 3 Country in SEA coming to Singapore from 2007 to 2017
+#Description: This program allows user to analyse CSV file to Dataframe
 #Name: <Matthew Ng Wei Zhe>
 #Group Name: <Python Underdog>
 #Class: <PN2004J>
 #Date: <17-02-21>
-#Version: <1.2>
+#Version: <1.3>
 #########################################################################
 
 #########################################################################
-#IMPORT Pandas Library for Data Analysis
+#IMPORT Pandas Library for Data Analysis and Matplotlib for Graphic Mode
 #########################################################################
 #import pandas for data analysis
 import pandas as pd
 
-#import matplotlib for graphic mode (Optional)
+#import matplotlib for graphic mode
 import matplotlib.pyplot as pit
-
-#########################################################################
-#IMPORT Pandas Library for Data Analysis
 #########################################################################
 
 #########################################################################
@@ -34,49 +31,44 @@ class DataAnalysis:
     #show specific country dataframe
     sortCountry(dataframe)
 #########################################################################
-#CLASS Branch: End of Code
-#########################################################################
 
 #########################################################################
 #FUNCTION Branch - sortCountry
 #parses data and displays sorted result(s)
 #########################################################################
 def sortCountry(df):
-  token = 0
+  #key to unlock graphical mode if function goes well
+  graphical_token = 0
 
-  #slicing dataframe using iloc 2007 - 2017 SEA to form new dataframe
-  new_df = df.iloc[348:479, 0:9]
-  #form new dataframe based on new index and disposable of the old index column
-  new_df = new_df.reset_index(drop=True)
+  #slicing dataframe using iloc based on primary objective and form new dataframe properly
+  new_df = df.iloc[348:479, 0:9].reset_index(drop=True)
 
   #disply new dataframe (rows and colums)
-  print("\nThe following dataframe for SEA from 2007 - 2017 are read as follows: \n")
+  print("\nRegion: South East Asia" + "\nPeriod: 2007 - 2017\n" + "\nThe following Dataframe read as follow,\n")
   print(new_df)
 
-  #selecting country columns and adding them on a vertical axis in descending order based on top 3
-  top3_country = new_df.iloc[:, 2:9].sum(axis=0).sort_values(ascending=False).nlargest(3)
+  #selecting country columns and adding them on a vertical axis in descending order based on top 3 and form new dataframe
+  top3_country = new_df.iloc[:, 2:9].sum(axis=0).sort_values(ascending=False).nlargest(3).reset_index()
 
   #print top 3 countries coming to Singapore in SEA from 2007 - 2017
-  print("\nThe top 3 countries with the most visitors coming to Singapore listed in SEA from 2007 - 2017 are read as follows:\n")
+  print("\nHere are the top 3 countries coming to Singapore listed above,\n")
 
-  #reset index to generate new dataframe for sum value output
-  top3_country = top3_country.reset_index()
   #sort sum value output into columns based on country and visitors
   top3_country.columns = ['Country', 'Visitors']
-  #label top 3
+  #change index to represnet top 3
   top3_country.index = ['Most Visted →', 'Second Most Visted → ', 'Third Most Visted →']
 
-  #display top 3 countries coming to Singapore in SEA from 2007 - 2017
+  #display top 3 countries coming to Singapore in SEA from 2007 - 2017 and validate token in case of error
   try:
    print(top3_country)
   except:
    print("An ERROR has occured!!!")
   else:
-    token = token + 1
+    graphical_token += 1 #give token/key +1
 
-  if token >= 1:
-    user_decision = input("\nDo you want a graphical model? Yes/No : ",)
-    if user_decision == "Yes":
+  if graphical_token >= 1: #identify token/key to unlock user input for graphical mode decision
+    user_decision = input("\nDo you want a graphical model? Y/N : ",).lower() #convert all input to lowercase to minimize user input error
+    if user_decision == 'y': #accept graphical mode
      activities = ['Brunei Darussalam ', 'Indonesia', 'Malaysia', 'Philippines', 'Thailand', 'Viet Nam', 'Myanmar']
      slices = [715883, 27572424, 11337420, 6548622, 4945136, 3914607, 1042608]
      pit.pie(slices,
@@ -89,32 +81,30 @@ def sortCountry(df):
      pit.legend()
      pit.show()
      print("Request is successful!")
-    elif user_decision == "No":
-     print("Request has been passed!")
-    else:
-      print("Invalid input! Request has been passed!")
+    elif user_decision == 'n': #deny graphical mode
+     print("Request has been aborted!")
+    else: #report and deny graphical mode
+      print("Invalid input! Request has been aborted!")
 
 
   #return function to caller which makes call to other function
   return
-
-#########################################################################
-#FUNCTION Branch: End of Code
 #########################################################################
 
 #########################################################################
-#Main Branch
+#Primary Branch
 #########################################################################
 if __name__ == '__main__':
   
   #Project Title
-  print('######################################')
-  print('# Data Analysis App - PYTHON Project #')
-  print('######################################')
+  print('##############################################')
+  print('# Primary Data Analysis App - PYTHON Project #')
+  print('##############################################')
 
   #perform data analysis on specific excel (CSV) file
   DataAnalysis()
+#########################################################################
 
 #########################################################################
-#Main Branch: End of Code
+#End of Code 
 #########################################################################
