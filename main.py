@@ -5,7 +5,7 @@
 #Group Name: <Python Underdog>
 #Class: <PN2004J>
 #Date: <17-02-21>
-#Version: <1.3>
+#Version: <1.3a>
 #########################################################################
 
 #########################################################################
@@ -69,12 +69,12 @@ def sortCountry(df):
   if graphical_token >= 1: #identify token/key to unlock user input for graphical mode decision
     user_decision = input("\nDo you want a graphical model? Y/N : ",).lower() #convert all input to lowercase to minimize user input error
     if user_decision == 'y': #accept graphical mode
-     activities = ['Brunei Darussalam ', 'Indonesia', 'Malaysia', 'Philippines', 'Thailand', 'Viet Nam', 'Myanmar']
+     countries = ['Brunei Darussalam ', 'Indonesia', 'Malaysia', 'Philippines', 'Thailand', 'Viet Nam', 'Myanmar']
      slices = [715883, 27572424, 11337420, 6548622, 4945136, 3914607, 1042608]
      pit.pie(slices,
-        labels=activities,
+        labels=countries,
         startangle=90,
-        shadow=True,
+        shadow=False,
         explode=(0, 0, 0, 0, 0, 0, 0),
         autopct='%1.2f%%')
 
