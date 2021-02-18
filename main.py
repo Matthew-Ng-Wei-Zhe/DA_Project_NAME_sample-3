@@ -5,7 +5,7 @@
 #Group Name: <Python Underdog>
 #Class: <PN2004J>
 #Date: <17-02-21>
-#Version: <2.0>
+#Version: <2.0a>
 #########################################################################
 
 #########################################################################
@@ -44,7 +44,7 @@ def sortCountry(df):
   new_df = df.iloc[348:479, 0:9].reset_index(drop=True)
 
   #disply new dataframe (rows and colums)
-  print("\nRegion: South East Asia" + "\nPeriod: 2007 - 2017\n" + "\nThe following Dataframe read as follow,\n")
+  print("\nRegion: South-East Asia" + "\nPeriod: 2007 - 2017\n" + "\nThe following Dataframe read as follow,\n")
   print(new_df)
 
   #selecting country columns and adding them on a vertical axis in descending order based on top 3 and form new dataframe
@@ -67,7 +67,7 @@ def sortCountry(df):
     graphical_token += 1 #give token/key +1
 
   if graphical_token >= 1: #identify token/key to unlock user input for graphical mode decision
-    user_decision = input("\nDo you want a graphical model? Y/N : ",).lower() #convert all input to lowercase to minimize user input error
+    user_decision = input("\nDo you want a graphical model? Y/N : ", ).lower() #convert all input to lowercase to minimize user input error
     if user_decision == 'y': #accept graphical mode
      print("Request has been passed!")
      #fill in graphical mode information
@@ -75,9 +75,12 @@ def sortCountry(df):
      slices = [715883, 27572424, 11337420, 6548622, 4945136, 3914607, 1042608]
      pi.pie(slices, labels=countries, startangle=90, shadow=False, autopct='%1.2f%%')
      pi.legend()
+
      pi.show(block=False)#show pie chart without stopping program
+
     elif user_decision == 'n': #deny graphical mode
      print("Request has been aborted!")
+
     else: #report and deny graphical mode
       print("Invalid input! Request has been aborted!")
 
@@ -91,20 +94,65 @@ def sortCountry(df):
 #########################################################################
 if __name__ == '__main__':
   
-  #Project Title
+  #project title
   print('##############################################')
   print('# Primary Data Analysis App - PYTHON Project #')
-
   print('##############################################')
 
   #perform data analysis on specific excel (CSV) file
   DataAnalysis()
 
+  #optional branch to find user input based on region and time 
   print('\n################################################')
   print('# Secondary Data Analysis App - PYTHON Project #')
   print('################################################')
 
-  prin = input("j", )
+  original = pd.read_csv('MonthyVisitors.csv')
+
+  region = []
+
+  while True:
+   print("\nHere are the available regions,")
+   print("(1) South-East Asia"
+        ,"\n(2) Asia-Pacific"
+        , "\n(3) South-Asia Pacific"
+        , "\n(4) Middle-East"
+        , "\n(5) Europe"
+        , "\n(6) North-America"
+        , "\n(7) Australia & Africa")
+   country_input = input("\nPlease select a region, E.g. 4 for Europe: ", )
+
+   if country_input == '1':
+     original = original.iloc[:, 0:9]
+     region.append("South-East Asia")
+     break
+   elif country_input == '2':
+     original = original[['Year','Month'] + original.iloc[:, 9: 14].columns.tolist()]
+     region.append("South-Asia Pacific")
+     break
+   elif country_input == '3':
+     original = original[['Year','Month'] + original.iloc[:, 14: 17].columns.tolist()]
+     region.append("South-Asia Pacific")
+     break
+   elif country_input == '4':
+     original = original[['Year','Month'] + original.iloc[:, 17: 20].columns.tolist()]
+     region.append("Middle-East")
+     break
+   elif country_input == '5':
+     original = original[['Year','Month'] + original.iloc[:, 20: 31].columns.tolist()]
+     region.append("Europe")
+     break
+   elif country_input == '6':
+     original = original[['Year','Month'] + original.iloc[:, 31: 33].columns.tolist()]
+     region.append("North-America")
+     break
+   elif country_input == '7':
+     original = original[['Year','Month'] + original.iloc[:, 33: 36].columns.tolist()]
+     region.append("Australia & Africa")
+     break
+   else:
+     print("Invalid Input! Please try again!")
+  
 #########################################################################
 
 
