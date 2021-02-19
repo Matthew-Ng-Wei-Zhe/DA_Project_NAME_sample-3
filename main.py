@@ -5,7 +5,7 @@
 #Group Name: <Python Underdog>
 #Class: <PN2004J>
 #Date: <17-02-21>
-#Version: <2.0b>
+#Version: <3.0>
 #########################################################################
 
 #########################################################################
@@ -121,7 +121,7 @@ if __name__ == '__main__':
         , "\n(5) Europe"
         , "\n(6) North-America"
         , "\n(7) Australia & Africa")
-   country_input = input("\nPlease select a region, E.g. 4 for Europe: ", )
+   country_input = input("\nPlease select a region, E.g. 4 for Europe: \n", )
 
    if country_input == '1':
      original = original.iloc[:, 0:9]
@@ -162,12 +162,13 @@ if __name__ == '__main__':
    end_year = []
    end_month = []
 
-   start_time = input("\nPlease choose a start period from 1978 Jan to 2017 Nov," + "\nE.g. 1990 Jan or 1990: ",)
+   start_time = input("\nPlease choose a start period from 1978 Jan to 2017 Nov," + "\nE.g. 1990 Jan or 1990: \n",)
 
    if len(start_time.split()) > 1:
      if start_time != "2017 Dec":
       start_year, start_month = start_time.split()
       if start_year in year and start_month in month:
+       start_year
        break
       else:
        print("Invalid Input! Please try again!")
@@ -182,7 +183,7 @@ if __name__ == '__main__':
        print("Invalid Input! Please try again!")
   
   while True:
-   end_time = input("\nPlease choose a end period from your start period to 2017 Nov," + "\nE.g. 1990 Jan or 1990: ",)
+   end_time = input("\nPlease choose a end period from your start period to 2017 Nov," + "\nE.g. 1990 Jan or 1990: \n",)
   
    if len(end_time.split()) > 1:
      if end_time != "2017 Dec":
@@ -200,6 +201,45 @@ if __name__ == '__main__':
        break
      else:
        print("Invalid Input! Please try again!")
+       
+  month_s = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  
+  df = pd.DataFrame(columns=['Year', 'Month'])
+
+  if (start_year < end_year):
+    for i in range(int(start_year), int(end_year) + 1):
+      if i == int(start_year):
+        month_list = month_s[month_s.index(start_month):]
+      elif i == int(end_year):
+        month_list = month_s[:month_s.index(end_month) + 1]
+      else:
+        month_list = month_s
+
+      df_temp = pd.DataFrame()
+      df_temp['Month'] = month_list
+      df_temp['Year'] = i
+
+      df = df.append(df_temp, ignore_index=True)
+
+  elif (start_year == end_year):
+    df_temp = pd.DataFrame()
+    df_temp['Month'] = month_s[month_s.index(start_month):month_s.index(end_month) + 1]
+    df_temp['Year'] = start_year
+
+    df = df.append(df_temp, ignore_index=True)
+
+  try:
+   original['Year'] = original['Year'].astype(str)
+   df['Year'] = df['Year'].astype(str)
+  except:
+   print("An ERROR has occured!!!")
+  else:
+   print("\nRegion: " + region[0])
+   requested_df = pd.merge(original, df, how = 'inner', on = ['Year', 'Month'])
+   print(requested_df)
+
+    
+  
 
        
 #########################################################################
