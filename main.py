@@ -5,7 +5,7 @@
 #Group Name: <Python Underdog>
 #Class: <PN2004J>
 #Date: <17-02-21>
-#Version: <3.0>
+#Version: <4.0alpha>
 #########################################################################
 
 #########################################################################
@@ -157,10 +157,6 @@ if __name__ == '__main__':
   while True:
    year = str(list(range(1978, 2018)))
    month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-   start_year = []
-   start_month = []
-   end_year = []
-   end_month = []
 
    start_time = input("\nPlease choose a start period from 1978 Jan to 2017 Nov," + "\nE.g. 1990 Jan or 1990: \n",)
 
@@ -234,14 +230,25 @@ if __name__ == '__main__':
   except:
    print("An ERROR has occured!!!")
   else:
-   print("\nRegion: " + region[0])
+   print('\n################################################')
+   print('# Tertiary Data Analysis App - PYTHON Project #')
+   print('################################################')
+   print("\nRegion: " + region[0]) 
+   print("Period: " + start_time + " - " + end_time)
    requested_df = pd.merge(original, df, how = 'inner', on = ['Year', 'Month'])
+   print("\nThe following Dataframe read as follow,\n")
    print(requested_df)
 
-    
-  
-
-       
+  end_input = input("\nDo you want to see the total visitors coming to Singapore \nwithin the period accordingly? Y/N? : ", ).lower()
+  if end_input == 'y':
+    print("Request has been passed!\n")
+    last_df = requested_df.iloc[:, 2:].sum(axis=0).sort_values(ascending=False).reset_index()
+    last_df.columns = ['Country', 'Visitors']
+    print(last_df)
+  elif end_input == 'n':
+    print("Request has been aborted!")
+  else:
+    print("Invalid Input! Request has been aborted!")     
 #########################################################################
 
 
