@@ -5,7 +5,7 @@
 #Group Name: <Python Underdog>
 #Class: <PN2004J>
 #Date: <17-02-21>
-#Version: <2.0a>
+#Version: <2.0b>
 #########################################################################
 
 #########################################################################
@@ -109,9 +109,10 @@ if __name__ == '__main__':
 
   original = pd.read_csv('MonthyVisitors.csv')
 
-  region = []
-
   while True:
+
+   region = []
+
    print("\nHere are the available regions,")
    print("(1) South-East Asia"
         ,"\n(2) Asia-Pacific"
@@ -152,10 +153,60 @@ if __name__ == '__main__':
      break
    else:
      print("Invalid Input! Please try again!")
+
+  while True:
+   year = str(list(range(1978, 2018)))
+   month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+   start_year = []
+   start_month = []
+   end_year = []
+   end_month = []
+
+   start_time = input("\nPlease choose a start period from 1978 Jan to 2017 Nov," + "\nE.g. 1990 Jan or 1990: ",)
+
+   if len(start_time.split()) > 1:
+     if start_time != "2017 Dec":
+      start_year, start_month = start_time.split()
+      if start_year in year and start_month in month:
+       break
+      else:
+       print("Invalid Input! Please try again!")
+     else:
+       print("Invalid Input! Please try again!")
+   else:
+     start_year = start_time
+     start_month = 'Jan'
+     if start_year in year:
+       break
+     else:
+       print("Invalid Input! Please try again!")
   
+  while True:
+   end_time = input("\nPlease choose a end period from your start period to 2017 Nov," + "\nE.g. 1990 Jan or 1990: ",)
+  
+   if len(end_time.split()) > 1:
+     if end_time != "2017 Dec":
+      end_year, end_month = end_time.split()
+      if end_year in year and end_month in month:
+       break
+      else:
+       print("Invalid Input! Please try again!")
+     else:
+       print("Invalid Input! Please try again!")
+   else:
+     end_year = end_time
+     end_month = 'Dec'
+     if end_year in year:
+       break
+     else:
+       print("Invalid Input! Please try again!")
+
+       
 #########################################################################
 
 
 #########################################################################
 #End of Code 
 #########################################################################
+
+
