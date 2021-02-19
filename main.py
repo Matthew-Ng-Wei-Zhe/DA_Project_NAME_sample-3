@@ -5,7 +5,7 @@
 #Group Name: <Python Underdog>
 #Class: <PN2004J>
 #Date: <17-02-21>
-#Version: <5.0>
+#Version: <5.0a>
 #########################################################################
 
 #########################################################################
@@ -198,9 +198,12 @@ if __name__ == '__main__':
    if len(end_time.split()) > 1:#if YY MM was used
      if end_time != "2017 Dec":#deny "2017 Dec" → not included
       #split YY MM to "YY" and "MM" into two variables end_year(YY) and end_month(MM)
-      end_year, end_month = end_time.split()
-      if end_year in year and end_month in month:#check valid year and month input
-       break
+      end_year, end_month = end_time.split()#check valid year and month input
+      if end_year in year and end_month in month:
+        if end_year < start_year:
+          print("Invalid Input! Please try again!")#check end_year does not go behind start_year
+        else:
+          break
       else:
        print("Invalid Input! Please try again!")
      else:
@@ -208,8 +211,11 @@ if __name__ == '__main__':
    else:#if YY was used
      end_year = end_time#put "YY" into variable start_year(YY)
      end_month = 'Dec'#ensure YY always starting in the starting month of "Jan"
-     if end_year in year:#check valid year input
-       break
+     if end_year in year: #check valid year input
+       if end_year < start_year:
+         print("Invalid Input! Please try again!")#check end_year does not go behind start_year
+       else:
+         break
      else:
        print("Invalid Input! Please try again!")
        
